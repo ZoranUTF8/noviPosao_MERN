@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../TRIBUTEpAG"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "TRIBUTEpAG"
+	}
+}

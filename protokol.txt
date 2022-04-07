@@ -1,0 +1,359 @@
+STYLED COMPONENTS used to style components
+
+ npm install styled-components
+
+import styled from 'styled-components'
+
+const El = styled.HTMLelementName`(DIV,BUTTON,SECTION...)
+  // styles go here
+`
+
+no name collisions, since unique class
+vscode-styled-components extension
+colors and bugs
+style entire react component
+
+const Wrapper = styled.el`style code`
+
+const Component = () => {
+  return (
+    <Wrapper>
+      <h1> Component</h1>
+    </Wrapper>
+  )
+}
+only responsible for styling
+wrappers folder in assets
+
+
+//* --------------------------------
+
+//* --------------------------------
+ Change specific values in the state
+
+ const toggleMember = () => {
+    setValues({ ...values, isMember: !values.isMember });
+  };
+
+Using React Router version 6
+
+
+__________________ ES6 MODULES __________________
+Node uses CommonJS but supports ES6
+
+CommonJS => Node.js Default
+const express = require("express");
+const app = express();
+
+ES6
+import express from "express"
+const app = express();
+
+We can either use extension .mjs or in package .json
+
+If we use ES6 we need to add the .js in the imports
+___________________________________________
+
+//* TO THROW A CUSTOM ERROR ----
+
+//* ROUTES
+app.get("/", (req, res) => {
+  throw new Error("error");
+  res.send("ola");
+});
+
+----------------------------------------
+
+//* INSTAL ENV--------------------------
+
+npm install dotenv
+```
+
+- import dotenv from 'dotenv'
+- dotenv.config()
+
+- create .env
+- PORT=4000
+- .gitignore
+- /node_modules
+- .env
+
+//-----------------------------------------
+
+
+//* ------------- PROTOCOL ----------------
+
+1. create react app
+2. add pages & COMPONENTS
+3. add a landing page with landing component
+4. add react router 6 routing
+5. connect pages to routes
+6. add global context for state management
+7. add logic to show alert when not all values are present in login or register pages {showAlert && <Alert />}
+
+8. add server and basic connection to mongo db (USE EITHER COMMONJS OR ES6)
+8.1 add express and nodemon (nodemon dev dep) 
+"scripts": {
+    "start": "nodemon server"
+  },
+8.2 add not found & error midleware that will go for all requests
+
+9. add .env & .gitignore
+
+10. connect to mongo atlas using mongoose (make a separate connect folder with the function)
+
+11. create register auth with login,register,update user 
+add app.use(express.json()); above other app.use to enable json data available in the controlers
+
+12. create  job route handler and controlers
+
+13.create user model and add email validate with validator npm package (npm install validator) easy to use
+
+14. set up user register controller and test in postman
+
+15. errors that can happen in connecttrolers we pass to the error handler with next(error);
+
+16. we dont have to use try catch in the controlers wiht adding the Express-Async-Errors Package
+    npm install express-async-errors
+
+17. add http-status-codes library for convenince instead of hardcoding the values
+
+18. set up error handling 
+
+- create a custom class that extends the Error class
+
+19. Hash Passwords with bcrypt in the pre middleware in mongoose
+
+//* Triggered whenever we add a new user to DB.(.create and .save in mongoose action)
+UserSchema.pre("save", async function () {
+  //* CREATE SALT
+  const salt = await bcrypt.genSalt(10);
+
+  //* hash the password
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+
+20. set JWT web token to user register
+generate method inside the model to create a JWT  UserSchema.methods.createJWT = function () {...}
+
+When user logs in he gets a token that is than returned and used in the app state
+
+npm install jsonwebtoken
+
+21. add password: { select: false }, to the user model so it does not return the password but if we use .create it will not work.
+
+22. instal concurently npm install concurrently --save-dev 
+
+runs front-end and backend (server) together
+
+than add to package json 
+"scripts": {
+    "server": "nodemon server --ignore client",
+    "client": "npm start --prefix client",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \" npm run client\""
+  }
+
+  now we can run both on npm start or separate with npm run server or client
+
+  --kill-others-on-fail - kils other if one dies
+
+
+
+23. FIX THE CORS Fetch error
+
+We need to permit loading resources for our browser from different server
+
+- access from anywhere
+
+We can fetch data from our own server but not from other sources
+
+const data = await response.json();
+
+Two fixes:
+
+1. npm i cors  WE CAN SET UP THE ORIGIN WHICH DOMAIN IS ALLOWED TO ACCESS
+
+
+2. Using proxy 
+
+- access from anywhere
+- don't want to use full url
+
+To tell the development server to proxy any unknown requests to your API server in development, add a proxy field to your package.json, for example:
+we add proxy in package.json
+"proxy":"http://localhost:5000"
+
+now we can use 
+
+//* SERVER TEST ROUTE
+app.get("/api/v1/testRoute", (req, res) => {
+  res.json({
+    msg: "API",
+  });
+});
+
+     const response = await fetch("/api/v1/testRoute");
+
+[cra proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/)
+ 
+restart server
+
+
+CONNECT USER REGISTER FRONTEND TO BACKEND
+24. register user front end 
+
+use axios db
+
+25. setup user login backend
+
+add Morgan Package that logs requests
+exa: POST /api/v1/auth/register 400 72.493 ms - 94
+
+npm install morgan
+
+
+26. setup login front end
+
+27. set up dashboard folder in pages and add protected route
+
+28. add navbar big sidebar small sidebar component to components
+
+29. add react icons
+
+30. add navbar look
+
+31. add link for the small sidebar file 
+
+32. set up small sidebar
+
+33. set up big sidebar
+
+
+34. set up authenticate user middleware for update user and all jobs routes
+
+//*  ONLY UPDATE USER SECURD
+router.route("/updateUser").patch(authenticateUser,updateUser);
+
+//* ALL JOB ROUTES
+app.use("/api/v1/jobs", authenticateUser, jobRoutes);
+
+35. Test in postman
+
+36. Add update user logic server
+When we use user.save() in the update function
+
+37. Set up user profile frontend
+
+38. Add axios interceptors for sending the token to the server
+
+39. Logout the user if error with token in update.
+
+40. Create Job model
+
+41. Add create job method to the job controller
+
+42. Add job state values to global state AppContext
+
+43. AddJob Page - Setup
+
+ Change State Values With Handle Change
+
+- [JS Nuggets Dynamic Object Keys](https://youtu.be/_qxCYtWm0tw)
+
+
+44. Add clear values for forms
+
+45. Add create job to frontend
+
+46. Get all jobs page setup
+
+47. Create all jobs front page
+
+
+48. Create delete job backend
+
+49. Create delete job/edit job frontend
+
+50. Add fake data using mockaroo
+
+51. An aggregation pipeline consists of one or more stages that process documents:
+
+Each stage performs an operation on the input documents. For example, a stage can filter documents, group documents, and calculate values.
+The documents that are output from a stage are passed to the next stage.
+An aggregation pipeline can return results for groups of documents. For example, return the total, average, maximum, and minimum values.
+
+52. set up stats backend and frontend
+
+53. Add agreagation base on year and month
+
+54. Add charts to frontend bar chart area chart
+
+55. Add filter / search to the server jobs controller
+For search use mongo db regex opeartor
+
+
+if (search) {                                     CASE INSENSITIVE
+    queryObject.position = { $regex: search, $options: "i" };
+  }
+
+  Gets all job where the letter exists
+
+
+56. Set up Search container frontend (Filtering and search)
+Add the search filter query params to the request from the frontend
+
+57. Set add pagination backend and frontend
+
+58. Get app production ready and deploy
+"build-client": "cd client && npm run build",
+
+59. 
+Security Packages
+
+- remove log in the error-handler
+- [helmet](https://www.npmjs.com/package/helmet)
+  Helmet helps you secure your Express apps by setting various HTTP headers.
+- [xss-clean](https://www.npmjs.com/package/xss-clean)
+  Node.js Connect middleware to sanitize user input coming from POST body, GET queries, and url params.
+- [express-mongo-sanitize](https://www.npmjs.com/package/express-mongo-sanitize)
+  Sanitizes user-supplied data to prevent MongoDB Operator Injection.
+- [express-rate-limit](https://www.npmjs.com/package/express-rate-limit)
+  Basic rate-limiting middleware for Express.
+
+`sh
+npm install helmet xss-clean express-mongo-sanitize express-rate-limit
+```
+
+```js
+server.js;
+
+import helmet from "helmet";
+import xss from "xss-clean";
+import mongoSanitize from "express-mongo-sanitize";
+
+app.use(express.json());
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
+```
+
+#### Limit Requests
+
+```js
+authRoutes.js;
+
+import rateLimiter from "express-rate-limit";
+
+const apiLimiter = rateLimiter({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10,
+  message: "Too many requests from this IP, please try again after 15 minutes",
+});
+
+router.route("/register").post(apiLimiter, register);
+router.route("/login").post(apiLimiter, login);
+```
+
+
+add rate limiter to the whole app
