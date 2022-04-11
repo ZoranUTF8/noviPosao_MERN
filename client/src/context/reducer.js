@@ -25,6 +25,9 @@ import {
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
   CHANGE_PAGE,
+  DELETE_USER_BEGIN,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_ERROR,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -68,6 +71,7 @@ const reducer = (state, action) => {
         alertType: "danger",
         alertText: action.payload.msg,
       };
+
     case TOGGLE_SIDEBAR: {
       return {
         ...state,
@@ -109,6 +113,30 @@ const reducer = (state, action) => {
         showAlert: true,
         alertType: "danger",
         alertText: action.payload.msg,
+      };
+    }
+    case DELETE_USER_BEGIN: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case DELETE_USER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: "success",
+        alertText: "Račun je uspješno izbrisan",
+      };
+    }
+    case DELETE_USER_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: "danger",
+        alertText: "pROBLEM U BRISANJUE",
       };
     }
     // * When an input change happens put the page back to 1
