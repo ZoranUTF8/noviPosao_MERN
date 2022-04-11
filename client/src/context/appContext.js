@@ -36,6 +36,9 @@ import {
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
   CHANGE_PAGE,
+  DELETE_USER_BEGIN,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_ERROR,
 } from "./actions";
 
 //* get user from local storage if exist
@@ -253,8 +256,6 @@ const AppProvider = ({ children }) => {
         jobType,
         status,
       });
-      console.log(res);
-
       dispatch({ type: CREATE_JOB_SUCCESS });
 
       //* call function instead clearValues()
@@ -349,7 +350,6 @@ const AppProvider = ({ children }) => {
     dispatch({ type: DELETE_JOB_BEGIN });
 
     try {
-      console.log("Deletes frontend");
       // * Send delete request to server
       await authFetchRequest.delete(`/jobs/${jobId}`);
 
@@ -361,7 +361,21 @@ const AppProvider = ({ children }) => {
       logoutUser();
     }
   };
+  //? DELETE USER PROFILE
+  const deleteUser = async (userId) => {
+    dispatch({ type: DELETE_USER_BEGIN });
 
+    try {
+      // * Send delete request to server
+      await authFetchRequest.delete(`/api/v1/auth/${userId}`);
+      dispatch({ type: DELETE_USER_SUCCESS });
+    } catch (error) {
+      // * If error than logout user
+      console.log(error);
+      dispatch({ type: DELETE_USER_ERROR });
+    }
+    clearAlert();
+  };
   // ? Show stats
   const showStats = async () => {
     dispatch({ type: SHOW_STATS_BEGIN });
@@ -398,41 +412,6 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CHANGE_PAGE, payload: { page } });
   };
 
-  //? DELETE USER PROFILE
-  const deleteUser = async (userEmail) => {
-    // dispatch({ type: UPDATE_USER_BEGIN });
-    // try {
-    //   // ? Send the updated user values to the server with the authorisation token from the current user in the request header
-    //   const { data } = await authFetchRequest.patch(
-    //     "/auth/updateUser",
-    //     updatedUserValues
-    //   );
-
-    //   //* Get the updated user data from the server
-    //   const { user, location, token } = data;
-
-    //   //* Send new user values to the reducer to update the state
-    //   dispatch({
-    //     type: UPDATE_USER_SUCCESS,
-    //     payload: { user, location, token },
-    //   });
-
-    //   //* Asdd updated user values to the local storage
-    //   addUserToLocalStorage({ user, location, token });
-    // } catch (error) {
-    //   if (error.response.status !== 401 && error.response.status !== 500) {
-    //     dispatch({
-    //       type: UPDATE_USER_ERROR,
-    //       payload: { msg: error.response.data.msg },
-    //     });
-    //   }
-    // }
-    // //* clear alert after all actions completed
-    // clearAlert();
-
-    console.log(userEmail);
-  };
-
   return (
     <AppContext.Provider
       value={{
@@ -452,7 +431,7 @@ const AppProvider = ({ children }) => {
         showStats,
         clearFilters,
         changePage,
-        deleteUser
+        deleteUser,
       }}
     >
       {children}
