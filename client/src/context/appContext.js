@@ -364,6 +364,8 @@ const AppProvider = ({ children }) => {
   };
   //? DELETE USER PROFILE
   const deleteUser = async (userId) => {
+
+    
     dispatch({ type: DELETE_USER_BEGIN });
 
     try {
@@ -375,6 +377,7 @@ const AppProvider = ({ children }) => {
       setTimeout(() => {
         logoutUser();
       }, 3000);
+      
     } catch (error) {
       // * If error than logout user
       console.log(error);

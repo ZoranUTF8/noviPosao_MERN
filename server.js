@@ -18,7 +18,7 @@ const connectDB = require("./connectDB/connectDB");
 // * SECURITY
 const helmet = require("helmet");
 const xss = require("xss-clean");
-const mongoSanitize = require('express-mongo-sanitize');
+const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
 
 //* CONST
@@ -48,7 +48,7 @@ app.use(mongoSanitize());
 //* Add rate limiter for all requests
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 10 minutes
-  max: 20, // Limit each IP to 20 requests per `window` (here, per 10 minutes)
+  max: 200, // Limit each IP to 20 requests per `window` (here, per 10 minutes)
   message:
     "Previše zahtjeva sa ove IP adrese, pokušajte ponovo nakon 15 minuta.",
 });

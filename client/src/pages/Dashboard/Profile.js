@@ -33,6 +33,7 @@ const Profile = () => {
   const handleDelete = (e) => {
     // prevent default page relaod
     e.preventDefault();
+    
     deleteUser(user._id);
   };
 
