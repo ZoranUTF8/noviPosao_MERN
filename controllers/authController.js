@@ -5,8 +5,12 @@ const UserModel = require("../models/User");
 //* status codes
 const statusCode = require("http-status-codes");
 // * create custom error class
-const BadRequestError = require("../errors/bad-request");
-const UnauthenticatedError = require("../errors/unauthenticated");
+
+const {
+  BadRequestError,
+  NotFoundError,
+  UnauthenticatedError,
+} = require("../errors");
 
 //? REGISTER USER
 const register = async (req, res) => {
@@ -85,7 +89,7 @@ const login = async (req, res) => {
 
   res.status(statusCode.OK).json({ user, token, location: user.location });
 };
-
+//? UPDATE USER
 const updateUser = async (req, res) => {
   //* Logic runs after the user is authenticated
 
@@ -99,7 +103,6 @@ const updateUser = async (req, res) => {
 
   // * Query for the user from db using the id
   const user = await UserModel.findOne({ _id: req.user.userId });
-
 
   // * Set the user values to the new values
   user.email = email;
@@ -119,5 +122,33 @@ const updateUser = async (req, res) => {
     location: user.location,
   });
 };
+//? DELETE USER
+const deleteUser = async (req, res) => {
+  const { id: userId } = req.params;
 
-module.exports = { register, login, updateUser };
+  //* If any values missing throw bad request error
+  if (!userId) {
+    throw new BadRequestError("Unesite sve vrijednosti.");
+  }
+
+  //* Check if user exists
+  const user = await UserModel.findById({ _id: userId });
+
+  // * If user doesent exist throw not found
+  if (!user) {
+    throw new NotFoundError(`Nema korisnika sa ID-om ${userId}`);
+  } else {
+    // * Delete the user
+    const deleteResult = await user.remove();
+    console.log('====================================');
+    console.log("DELETED COUNT");
+    console.log('====================================');
+    console.log("====================================");
+    console.log(deleteResult);
+    console.log("====================================");
+
+    res.status(statusCode.OK).json({ msg: "Račun je uspješno obrisan." });
+  }
+};
+
+module.exports = { register, login, updateUser, deleteUser };

@@ -125,6 +125,7 @@ const AppProvider = ({ children }) => {
   );
 
   //* STATE MANIPULATION METHODS AND REDUCER DISPATCH
+
   //? DISPLAY ALERT
   const displayAlert = () => {
     dispatch({ type: DISPLAY_ALERT });
@@ -367,12 +368,18 @@ const AppProvider = ({ children }) => {
 
     try {
       // * Send delete request to server
-      await authFetchRequest.delete(`/api/v1/auth/${userId}`);
-      dispatch({ type: DELETE_USER_SUCCESS });
+      const res = await authFetchRequest.delete(`/auth/${userId}`);
+      // dispatch({ type: DELETE_USER_SUCCESS });
+      console.log("====================================");
+      console.log("DATA RECIVED TO FRONTEND");
+      console.log("====================================");
+      console.log("====================================");
+      console.log(res.data);
+      console.log("====================================");
     } catch (error) {
       // * If error than logout user
       console.log(error);
-      dispatch({ type: DELETE_USER_ERROR });
+      // dispatch({ type: DELETE_USER_ERROR });
     }
     clearAlert();
   };

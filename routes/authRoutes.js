@@ -11,10 +11,12 @@ const {
   register,
   login,
   updateUser,
+  deleteUser,
 } = require("../controllers/authController");
 
 router.route("/register").post(register);
 router.route("/login").post(login);
-router.route("/updateUser").patch(authenticateUser,updateUser);
+router.route("/updateUser").patch(authenticateUser, updateUser);
+router.route("/:id").delete(deleteUser);
 
 module.exports = router;
