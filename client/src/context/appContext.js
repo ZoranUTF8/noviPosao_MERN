@@ -66,7 +66,7 @@ export const initialState = {
   company: "",
   // jobLocation
   jobTypeOptions: ["puno", "skraćeno", "daljinski", "pripravnički"],
-  jobType: "puno-vrijeme",
+  jobType: "puno",
   statusOptions: ["intervju", "odbijen", "čekanje"],
   status: "čekanje",
   //* All jobs state
@@ -260,6 +260,7 @@ const AppProvider = ({ children }) => {
       dispatch({ type: CREATE_JOB_SUCCESS });
 
       //* call function instead clearValues()
+
       dispatch({ type: CLEAR_VALUES });
     } catch (error) {
       if (error.response.status === 401) return;
@@ -353,7 +354,6 @@ const AppProvider = ({ children }) => {
     try {
       // * Send delete request to server
       await authFetchRequest.delete(`/jobs/${jobId}`);
-
       // * Refresh all jobs
       getAllJobs();
     } catch (error) {
@@ -364,22 +364,27 @@ const AppProvider = ({ children }) => {
   };
   //? DELETE USER PROFILE
   const deleteUser = async (userId) => {
+
+    
     dispatch({ type: DELETE_USER_BEGIN });
 
     try {
       // * Send delete request to server
       const res = await authFetchRequest.delete(`/auth/${userId}`);
-      // dispatch({ type: DELETE_USER_SUCCESS });
-      console.log("====================================");
-      console.log("DATA RECIVED TO FRONTEND");
-      console.log("====================================");
-      console.log("====================================");
-      console.log(res.data);
-      console.log("====================================");
+
+      dispatch({ type: DELETE_USER_SUCCESS });
+
+      setTimeout(() => {
+        logoutUser();
+      }, 3000);
+      
     } catch (error) {
       // * If error than logout user
       console.log(error);
-      // dispatch({ type: DELETE_USER_ERROR });
+      dispatch({
+        type: DELETE_USER_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
     }
     clearAlert();
   };

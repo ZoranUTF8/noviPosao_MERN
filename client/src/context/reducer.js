@@ -9,6 +9,9 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  DELETE_USER_BEGIN,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_ERROR,
   HANDLE_CHANGE,
   CLEAR_VALUES,
   CREATE_JOB_BEGIN,
@@ -25,9 +28,6 @@ import {
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
   CHANGE_PAGE,
-  DELETE_USER_BEGIN,
-  DELETE_USER_SUCCESS,
-  DELETE_USER_ERROR,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -127,7 +127,7 @@ const reducer = (state, action) => {
         isLoading: false,
         showAlert: true,
         alertType: "success",
-        alertText: "Račun je uspješno izbrisan",
+        alertText: "Račun je uspješno izbrisan. Odjava za 3 sekunde",
       };
     }
     case DELETE_USER_ERROR: {
@@ -136,7 +136,7 @@ const reducer = (state, action) => {
         isLoading: false,
         showAlert: true,
         alertType: "danger",
-        alertText: "pROBLEM U BRISANJUE",
+        alertText: action.payload.msg,
       };
     }
     // * When an input change happens put the page back to 1
@@ -155,8 +155,8 @@ const reducer = (state, action) => {
         position: "",
         company: "",
         jobLocation: state.userLocation,
-        jobType: "full-time",
-        status: "pending",
+        jobType: "puno",
+        status: "čekanje",
       };
     }
     case CREATE_JOB_BEGIN: {
