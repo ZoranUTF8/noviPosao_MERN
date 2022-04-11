@@ -134,19 +134,12 @@ const deleteUser = async (req, res) => {
   //* Check if user exists
   const user = await UserModel.findById({ _id: userId });
 
-  // * If user doesent exist throw not found
+  // * If user is false throw not found
   if (!user) {
     throw new NotFoundError(`Nema korisnika sa ID-om ${userId}`);
   } else {
     // * Delete the user
-    const deleteResult = await user.remove();
-    console.log('====================================');
-    console.log("DELETED COUNT");
-    console.log('====================================');
-    console.log("====================================");
-    console.log(deleteResult);
-    console.log("====================================");
-
+    await user.remove();
     res.status(statusCode.OK).json({ msg: "Račun je uspješno obrisan." });
   }
 };
