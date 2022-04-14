@@ -67,6 +67,7 @@ const Wrapper = styled.nav`
     cursor: pointer;
   }
   .logo-text {
+    text-align: center;
     display: none;
     margin: 0;
   }

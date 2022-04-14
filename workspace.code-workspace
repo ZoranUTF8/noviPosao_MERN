@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../mern-course-jobify"
+		},
+		{
+			"path": "../Dev/Basic react project/react-projects/01-birthday-reminder/final"
 		}
 	],
 	"settings": {}

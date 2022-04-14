@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useState } from "react";
 //* React icons
 import { FaUserAlt, FaCaretDown } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -6,6 +6,7 @@ import { ImExit } from "react-icons/im";
 
 import { useAppContext } from "../context/appContext";
 import Logo from "./Logo";
+import Clock from "./Clock";
 import Wrapper from "../assets/wrappers/Navbar";
 
 const Navbar = () => {
@@ -23,7 +24,12 @@ const Navbar = () => {
 
         <div>
           <Logo />
-          <h3 className="logo-text">Kontrolna tabla</h3>
+          <h3 className="logo-text">
+            Kontrolna tabla
+            <span>
+              <Clock />
+            </span>
+          </h3>
         </div>
 
         <div className="btn-container">
