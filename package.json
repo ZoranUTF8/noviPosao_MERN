@@ -1,7 +1,7 @@
 {
   "name": "noviposaomern",
   "version": "1.0.0",
-  "description": "#### Track Your Job Search",
+  "description": "#### Pratite svoj status poslova",
   "main": "server.js",
   "scripts": {
     "build-client": "cd client && npm run build",
