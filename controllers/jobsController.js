@@ -18,9 +18,6 @@ const createJob = async (req, res) => {
   // * Get job values from the request
   const { company, position, jobLocation, jobType, status } = req.body;
 
-  console.log("====================================");
-  console.log(status);
-  console.log("====================================");
   // * Check if all values present
   if (!position || !company) {
     throw new BadRequestError("Molimo navedite sve vrijednosti");

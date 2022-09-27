@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Beehivve"
+		},
+		{
+			"path": "../BeehivveNewsApi"
+		},
+		{
+			"path": "../webDev"
+		},
+		{
+			"path": "../admin_dashboard_react"
+		},
+		{
+			"path": "../Tailwind"
+		},
+		{
+			"path": "../reactportfolio"
+		},
+		{
+			"path": "../../np-main"
+		},
+		{
+			"path": "../../vegaItZadatak"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "vegaItZadatak"
+	}
+}
