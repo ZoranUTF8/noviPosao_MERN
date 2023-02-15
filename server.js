@@ -74,9 +74,9 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/jobs", authenticateUser, jobRoutes);
 
 //! only when ready to deploy
-app.get("*", function (request, response) {
-  response.sendFile(__dirname + "/client/build", "index.html");
-});
+// app.get("*", function (request, response) {
+//   response.sendFile(__dirname + "/client/build", "index.html");
+// });
 
 //* MIDDLEWARE FOR ALL ROUTES
 app.use(notFoundMiddleware);
