@@ -4,31 +4,61 @@
 			"path": "."
 		},
 		{
-			"path": "../Beehivve"
-		},
-		{
-			"path": "../BeehivveNewsApi"
-		},
-		{
-			"path": "../webDev"
-		},
-		{
-			"path": "../admin_dashboard_react"
-		},
-		{
-			"path": "../Tailwind"
-		},
-		{
 			"path": "../reactportfolio"
 		},
 		{
-			"path": "../../np-main"
+			"path": "../useMemoExample"
 		},
 		{
-			"path": "../../vegaItZadatak"
+			"path": "../JavaScriptPractice"
+		},
+		{
+			"path": "../redux-tutorial"
+		},
+		{
+			"path": "../react-bootstrap-tutorial"
+		},
+		{
+			"path": "../react-bootstrap-website"
+		},
+		{
+			"path": "../react-bootstrap-website-api"
+		},
+		{
+			"path": "../practiceJs"
+		},
+		{
+			"path": "../separation_of_concerns"
+		},
+		{
+			"path": "../javascript-interview-prep"
+		},
+		{
+			"path": "../chatGpi"
+		},
+		{
+			"path": "../natours_API"
+		},
+		{
+			"path": "../BootstrapTemplates"
+		},
+		{
+			"path": "../trips"
+		},
+		{
+			"path": "../fullstack-hy2023"
+		},
+		{
+			"path": "../react-scrool-animation"
+		},
+		{
+			"path": "../NotesFrontendProduction"
+		},
+		{
+			"path": "../PhonebookFullstack"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "vegaItZadatak"
+		"liveServer.settings.multiRootWorkspaceName": null
 	}
 }

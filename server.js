@@ -35,7 +35,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 //! only when ready to deploy we need to point to the build folder
-app.use(express.static(__dirname + "/client/build"));
+app.use(express.static("build"));
+// app.use(express.static(__dirname + "/client/build"));
 
 //* makes json data available in the controlers
 app.use(express.json());

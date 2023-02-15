@@ -27,7 +27,6 @@ const register = async (req, res) => {
   const emailCheck = await UserModel.findOne({ email });
 
   if (emailCheck) {
-    console.log(emailCheck);
     //* send new Error as email is already in use
     throw new BadRequestError(
       `Oops, looks like this email is already registered,  your input was: ${emailCheck.email}`
