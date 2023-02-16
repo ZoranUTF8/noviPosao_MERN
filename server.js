@@ -35,7 +35,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 //! only when ready to deploy we need to point to the build folder
-app.use(express.static(__dirname + "/client/build"));
+app.use(express.static("build"));
+// app.use(express.static(__dirname + "/client/build"));
 
 //* makes json data available in the controlers
 app.use(express.json());
@@ -73,9 +74,9 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/jobs", authenticateUser, jobRoutes);
 
 //! only when ready to deploy
-app.get("*", function (request, response) {
-  response.sendFile(__dirname + "/client/build", "index.html");
-});
+// app.get("*", function (request, response) {
+//   response.sendFile(__dirname + "/client/build", "index.html");
+// });
 
 //* MIDDLEWARE FOR ALL ROUTES
 app.use(notFoundMiddleware);
