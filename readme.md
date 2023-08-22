@@ -1,6 +1,6 @@
 An application that enables you to generate your job applications and monitor the outcomes. Currently, it is only accessible in Serbian.
 This application enables basic CRUD functionalities, along with the ability to display an activity graph depicting them.
-The app is deployed on render.com and can be accessed at https://newjob.onrender.com/landing. To use it, you must create a new account and log in.
+The app is deployed on render.com and can be accessed at https://newjob.onrender.com  To use it, you must create a new account and log in.
 You can find the frontend build in the "build" folder, and the backend server code is located in the "server" folder.
 
 Dependencies:
